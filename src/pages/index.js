@@ -243,10 +243,15 @@ export default function About() {
                   />
                 )
               )}
-              <Box sx={{ gridColumn: "span 10", gridRow: "span 1" }}>
-                <Typography variant="h5" sx={{ textAlign: "center" }}>
-                  Co-Investigadores
-                </Typography>
+              <Box
+                sx={{
+                  gridColumn: "span 10",
+                  gridRow: "span 2",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Typography variant="h5">CO-INVESTIGADORES</Typography>
               </Box>
               <Box sx={{ gridColumn: "span 1", gridRow: "span 3" }}></Box>
               <Box sx={{ gridColumn: "span 8", gridRow: "span 3" }}>
@@ -272,9 +277,16 @@ export default function About() {
                   </li>
                 </ul>
               </Box>
-              <Box sx={{ gridColumn: "span 10", gridRow: "span 1" }}>
-                <Typography variant="h5" sx={{ textAlign: "center" }}>
-                  Instituciones participantes
+              <Box
+                sx={{
+                  gridColumn: "span 10",
+                  gridRow: "span 2",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Typography variant="h5">
+                  INSTITUCIONES PARTICIPANTES
                 </Typography>
               </Box>
               <Box sx={{ gridColumn: "span 1", gridRow: "span 3" }}></Box>
@@ -298,10 +310,15 @@ export default function About() {
                   </li>
                 </ul>
               </Box>
-              <Box sx={{ gridColumn: "span 10", gridRow: "span 1" }}>
-                <Typography variant="h5" sx={{ textAlign: "center" }}>
-                  Centros colaboradores
-                </Typography>
+              <Box
+                sx={{
+                  gridColumn: "span 10",
+                  gridRow: "span 2",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Typography variant="h5">CENTROS COLABORADORES</Typography>
               </Box>
               <Box sx={{ gridColumn: "span 1", gridRow: "span 3" }}></Box>
 
