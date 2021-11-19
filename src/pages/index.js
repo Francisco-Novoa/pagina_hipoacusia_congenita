@@ -425,8 +425,8 @@ export default function About() {
           <TabPanel value={value} index={3}>
             <Box
               sx={{
-                padding: "16px",
-                marginTop: "16px",
+                marginTop: "24px",
+                marginBottom: "16px",
               }}
             >
               <Typography component="div" variant="h4">
@@ -493,19 +493,16 @@ export default function About() {
                     </Typography>
                   </Box>
                 </a>
-
                 <Box
                   sx={{
+                    marginTop: "24px",
+                    marginBottom: "16px",
+
                     display: "flex",
-                    justifyContent: "center",
                     alignItems: "center",
-                    textAlign: "center",
-                    marginTop: "16px",
                   }}
                 >
-                  <Typography component="div" variant="h5">
-                    Referencias
-                  </Typography>
+                  <Typography variant="h5">REFERENCIAS</Typography>
                 </Box>
                 <ul>
                   <li>
