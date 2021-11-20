@@ -86,16 +86,19 @@ export default function Header({ sx }) {
       </Box>
       <Box sx={styles.links}>
         <Link to="/" sx={styles.link}>
-          Home
+          HOME
         </Link>
         <Link to="/hipoacusia" sx={styles.link}>
-          Hipoacusia Congenita
+          HIPOACUSIA CONGENITA
+        </Link>
+        <Link to="/results" sx={styles.link}>
+          RESULTADOS PREMILIMINARES
         </Link>
         <Link to="/study" sx={styles.link}>
-          Fases del Estudio
+          FASES DEL ESTUDIO
         </Link>
         <Link to="/contact" sx={styles.link}>
-          Contacto
+          CONTACTO
         </Link>
       </Box>
     </Paper>
