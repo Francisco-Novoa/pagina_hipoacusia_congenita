@@ -82,7 +82,7 @@ export default function Formulary({ initialValue }) {
     try {
       const token = sessionStorage.getItem("token");
       const response = await axios.post(
-        `${baseUrl}/subject`,
+        `${baseUrl}subject`,
         {
           subject: state,
         },

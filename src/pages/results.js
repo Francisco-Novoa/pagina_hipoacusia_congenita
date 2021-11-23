@@ -64,7 +64,7 @@ export default function Metodology() {
 
   const getData = async () => {
     try {
-      const result = await axios.get(`${baseUrl}/subject`);
+      const result = await axios.get(`${baseUrl}subject`);
       setState([...result.data.subjects]);
     } catch (error) {
       console.error(error);
