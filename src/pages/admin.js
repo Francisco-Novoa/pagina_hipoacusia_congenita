@@ -42,7 +42,7 @@ export default function Deafness() {
   const login = async () => {
     try {
       const result = (
-        await axios.post(`${baseUrl}/login`, {
+        await axios.post(`${baseUrl}login`, {
           username: state.username,
           password: state.password,
         })
