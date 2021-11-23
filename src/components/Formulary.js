@@ -81,10 +81,17 @@ export default function Formulary({ initialValue }) {
   const onSubmit = async () => {
     try {
       const token = sessionStorage.getItem("token");
-      const response = await axios.post(`${baseUrl}/subject`, {
-        token,
-        subject: state,
-      });
+      const response = await axios.post(
+        `${baseUrl}/subject`,
+        {
+          subject: state,
+        },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
       console.log(response);
     } catch (error) {
       console.error(error);
