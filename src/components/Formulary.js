@@ -88,7 +88,7 @@ export default function Formulary({ initialValue }) {
         },
         {
           headers: {
-            authorization: token,
+            authorization: `bearer ${token}`,
           },
         }
       );
