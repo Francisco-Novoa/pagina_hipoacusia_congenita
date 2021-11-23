@@ -93,6 +93,7 @@ export default function Formulary({ initialValue }) {
         }
       );
       console.log(response);
+      setState(initialValue);
     } catch (error) {
       console.error(error);
     }
