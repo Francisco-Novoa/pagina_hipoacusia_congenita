@@ -1,8 +1,13 @@
-import React from "react";
-import { Tabs, Tab, Box, Typography, Paper } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Tabs, Tab, Box, Paper, Container } from "@mui/material";
+import axios from "axios";
 
 import Layout from "../components/Layout";
-import tempDB from "../static/images/tempDB.png";
+import {
+  DataTableSocioDemografica,
+  DataTableClinicaGenetica,
+} from "../components/Table";
+import { baseUrl } from "../static/constants/constants";
 
 const styles = {
   contentInner: {
@@ -14,18 +19,16 @@ const styles = {
   },
   future: {
     gridRow: "1/max-content",
-    gridColumn: "1/19",
+    gridColumn: "1/20",
     marginRight: "8px",
     gridTemplateColumns: "repeat(20, 1fr)",
     gridAutoRows: "50px",
   },
-  titleBox: { display: "flex", alignItems: "center", flexDirection: "column" },
   links: { padding: "8px", color: "#237385" },
 };
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -36,7 +39,9 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Container>
+            <Box>{children}</Box>
+          </Container>
         </Box>
       )}
     </div>
@@ -51,63 +56,66 @@ function a11yProps(index) {
 }
 
 export default function Metodology() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const [state, setState] = useState([]);
+
+  const getData = async () => {
+    try {
+      const result = await axios.get(`${baseUrl}/subject`);
+      setState([...result.data.subjects]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <Layout>
       <Paper sx={styles.contentInner}>
         <Box sx={styles.future}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs value={value} onChange={handleChange}>
-              <Tab label="VARIABLES CLÍNICAS Y GENÉTICAS" {...a11yProps(0)} />
-              <Tab label="VARIABLES SOCIODEMOGRÁFICAS" {...a11yProps(1)} />
+              <Tab
+                component="span"
+                label="VARIABLES SOCIODEMOGRÁFICAS"
+                {...a11yProps(0)}
+              />
+              <Tab
+                component="span"
+                label="VARIABLES CLÍNICAS Y GENÉTICAS"
+                {...a11yProps(1)}
+              />
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
             <Box sx={styles.future}>
               <Box
-                sx={{ display: "flex", justifyContent: "center" }}
-                component="figure"
-              >
-                <Typography variant="h4" sx={styles.title}>
-                  Seccion en contrucción
-                </Typography>
-              </Box>
-              <Box
                 sx={{
-                  display: "flex",
                   gridRow: "1/max-content",
-                  gridColumn: "1/19",
-                  justifyContent: "center",
+                  gridColumn: "2/19",
+                  overflow: "scroll",
                 }}
-                component="figure"
               >
-                <img width="100%" src={tempDB} />
+                <DataTableSocioDemografica registros={state} />
               </Box>
             </Box>
           </TabPanel>
           <TabPanel value={value} index={1}>
             <Box sx={styles.future}>
               <Box
-                sx={{ display: "flex", justifyContent: "center" }}
-                component="figure"
-              >
-                <Typography variant="h4" sx={styles.title}>
-                  Seccion en contrucción
-                </Typography>
-              </Box>
-              <Box
                 sx={{
-                  display: "flex",
                   gridRow: "1/max-content",
-                  gridColumn: "1/19",
-                  justifyContent: "center",
+                  gridColumn: "2/19",
+                  overflow: "scroll",
                 }}
-                component="figure"
               >
-                <img width="100%" src={tempDB} />
+                <DataTableClinicaGenetica registros={state} />
               </Box>
             </Box>
           </TabPanel>

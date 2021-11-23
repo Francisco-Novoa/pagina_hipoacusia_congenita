@@ -7,11 +7,73 @@ import {
   TableRow,
 } from "@mui/material";
 
-const styles = {};
-
-export default function DataTable() {
+const ReferenceSequenceTable = ({ ref_seq }) => {
   return (
-    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Reference Sequence</TableCell>
+          <TableCell align="right">Posicion Cromosoma 13</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {ref_seq.map(({ ref_seq, pos_chr13 }, index) => {
+          return (
+            <TableRow key={index}>
+              <TableCell>{ref_seq.join(", ")}</TableCell>
+              <TableCell align="right">{pos_chr13.join(", ")}</TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
+  );
+};
+
+const RegistroSocioDemografico = ({
+  record: {
+    subject,
+    sxo_bco,
+    edad_a,
+    edad_m,
+    e_gest,
+    peso_nac,
+    region,
+    u_r,
+    m_educ,
+    n_educ1,
+    n_educ2,
+    ocupacion,
+    i_percap,
+    prevision,
+  },
+}) => (
+  <TableRow>
+    <TableCell>{subject}</TableCell>
+    <TableCell align="right">
+      {edad_a
+        ? `${edad_a}\u00A0años`
+        : edad_m
+        ? `${edad_a}\u00A0meses`
+        : "null"}
+    </TableCell>
+    <TableCell align="center">{e_gest}</TableCell>
+    <TableCell align="center">{peso_nac}</TableCell>
+    <TableCell align="center">{sxo_bco}</TableCell>
+    <TableCell align="center">{region}</TableCell>
+    <TableCell align="center">{u_r}</TableCell>
+    <TableCell align="center">{m_educ}</TableCell>
+    <TableCell align="center">{n_educ1}</TableCell>
+    <TableCell align="center">{n_educ2}</TableCell>
+    <TableCell align="center">{ocupacion}</TableCell>
+    <TableCell align="center">{i_percap}</TableCell>
+    <TableCell align="center">{prevision}</TableCell>
+  </TableRow>
+);
+
+export function DataTableSocioDemografica({ registros }) {
+  return (
+    <Table aria-label="simple table">
       <TableHead>
         <TableRow>
           <TableCell>Sujeto</TableCell>
@@ -35,6 +97,92 @@ export default function DataTable() {
           <TableCell align="center">
             Prevision&nbsp;de&nbsp;Salud&nbsp;(años)
           </TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {registros.length &&
+          registros.map((registro, index) => (
+            <RegistroSocioDemografico record={registro} key={index} />
+          ))}
+      </TableBody>
+    </Table>
+  );
+}
+
+const RegistroClinicoGenetico = ({
+  record: {
+    subject,
+    edad_dg_a,
+    edad_dg_m,
+    dg_audio_od,
+    dg_audio_oi,
+    perfil_od,
+    perfil_oi,
+    had_od,
+    had_oi,
+    edad_had_a,
+    edad_had_m,
+    prog_adod,
+    prog_adoi,
+    r_dis,
+    a_flia_ha,
+    comorbi_1,
+    comorbi_2,
+    alelo,
+    aa_codon,
+    haplotipo,
+    gen_adic,
+    ref_seq2,
+    gen,
+    mut_prot,
+    ref_seq,
+  },
+}) => (
+  <TableRow>
+    <TableCell>{subject}</TableCell>
+    <TableCell align="center">
+      {edad_dg_a
+        ? `${edad_dg_a}\u00A0años`
+        : edad_dg_m
+        ? `${edad_dg_m}\u00A0meses`
+        : "null"}
+    </TableCell>
+    <TableCell align="center">{dg_audio_od}</TableCell>
+    <TableCell align="center">{dg_audio_oi}</TableCell>
+    <TableCell align="center">{perfil_od}</TableCell>
+    <TableCell align="center">{perfil_oi}</TableCell>
+    <TableCell align="center">{had_od}</TableCell>
+    <TableCell align="center">{had_oi}</TableCell>
+    <TableCell align="center">
+      {edad_had_a
+        ? `${edad_had_a}\u00A0años`
+        : edad_had_m
+        ? `${edad_had_m}\u00A0meses`
+        : "null"}
+    </TableCell>
+    <TableCell align="center">{prog_adod}</TableCell>
+    <TableCell align="center">{prog_adoi}</TableCell>
+    <TableCell align="center">{r_dis}</TableCell>
+    <TableCell align="center">{a_flia_ha}</TableCell>
+    <TableCell align="center">{comorbi_1}</TableCell>
+    <TableCell align="center">{comorbi_2}</TableCell>
+    <TableCell align="center">{alelo}</TableCell>
+    <TableCell align="center">{aa_codon}</TableCell>
+    <TableCell align="center">{haplotipo}</TableCell>
+    <TableCell align="center">{ref_seq2}</TableCell>
+    <TableCell align="center">{gen}</TableCell>
+    <TableCell align="center">{gen_adic}</TableCell>
+    <TableCell align="center">{mut_prot}</TableCell>
+    <ReferenceSequenceTable ref_seq={ref_seq} />
+  </TableRow>
+);
+
+export function DataTableClinicaGenetica({ registros }) {
+  return (
+    <Table sx={{ minWidth: 650 }} aria-label="Tabla Clinica Genetica">
+      <TableHead>
+        <TableRow>
+          <TableCell>Sujeto</TableCell>
           <TableCell align="center">
             Edad&nbsp;de&nbsp;diagnostico audiológico
           </TableCell>
@@ -74,27 +222,22 @@ export default function DataTable() {
             Comorbilidad.&nbsp;Antecedentes relevantes&nbsp;en&nbsp;historia
             clínica.&nbsp;Descriptivo
           </TableCell>
+          <TableCell align="center">Alelos</TableCell>
+          <TableCell align="center">Aminoácido&nbsp;(Codon)</TableCell>
+          <TableCell align="center">Haplotipo</TableCell>
+          <TableCell align="center">Reference&nbsp;Sequence&nbsp;2</TableCell>
+          <TableCell align="center">Gen</TableCell>
+          <TableCell align="center">
+            Información&nbsp;genética adicional
+          </TableCell>
+          <TableCell align="center">Mutación&nbsp;en&nbsp;proteínas</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        <TableRow>
-          <TableCell>1</TableCell>
-          <TableCell align="right">1</TableCell>
-          <TableCell align="center">2</TableCell>
-          <TableCell align="center">200g</TableCell>
-          <TableCell align="center">Femenina</TableCell>
-          <TableCell align="center">Metropolitana</TableCell>
-          <TableCell align="center">Urbano</TableCell>
-          <TableCell align="center">Educacion Regular con PIE</TableCell>
-          <TableCell align="center">Educacion Básica</TableCell>
-          <TableCell align="center">Educación preescolar completa</TableCell>
-          <TableCell align="center">Estudiante</TableCell>
-          <TableCell align="center">167.000</TableCell>
-          <TableCell align="center">Isapre</TableCell>
-          <TableCell align="center">23 meses</TableCell>
-          <TableCell align="center">HSN profunda, HSN severa</TableCell>
-          <TableCell align="center">Plano Descendente</TableCell>
-        </TableRow>
+        {registros.length &&
+          registros.map((registro, index) => (
+            <RegistroClinicoGenetico record={registro} key={index} />
+          ))}
       </TableBody>
     </Table>
   );
