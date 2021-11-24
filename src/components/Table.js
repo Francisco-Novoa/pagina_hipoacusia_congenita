@@ -190,13 +190,13 @@ export function DataTableClinicaGenetica({ registros }) {
           <TableCell align="center">
             Diagnóstico audiológico oído&nbsp;izquierdo
           </TableCell>
-          <TableCell align="center">Progresividad</TableCell>
           <TableCell align="center">
             Perfil&nbsp;audiometrico oído&nbsp;derecho
           </TableCell>
           <TableCell align="center">
             Perfil&nbsp;audiometrico oído&nbsp;izquierdo
           </TableCell>
+          <TableCell align="center">Progresividad</TableCell>
           <TableCell align="center">HAD&nbsp;oído derecho</TableCell>
           <TableCell align="center">HAD&nbsp;oído izquierdo</TableCell>
           <TableCell align="center">
