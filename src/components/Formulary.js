@@ -368,7 +368,7 @@ export default function Formulary({ initialValue }) {
       <Box sx={{ gridColumn: "span 7", gridRow: "span 1" }}>
         <BasicSelect
           name={"a_flia_ha"}
-          displayName={"Registro de la discapacidad"}
+          displayName={"Antecedentes familiares de hipoacusia"}
           options={Selectors.simple}
           callback={onChange("a_flia_ha")}
           value={state.a_flia_ha}
