@@ -51,11 +51,7 @@ const RegistroSocioDemografico = ({
   <TableRow>
     <TableCell>{subject}</TableCell>
     <TableCell align="right">
-      {edad_a
-        ? `${edad_a}\u00A0años`
-        : edad_m
-        ? `${edad_a}\u00A0meses`
-        : "null"}
+      {edad_a ? `${edad_a}\u00A0años` : edad_m ? `${edad_a}\u00A0meses` : ""}
     </TableCell>
     <TableCell align="center">{e_gest}</TableCell>
     <TableCell align="center">{peso_nac}</TableCell>
@@ -136,6 +132,7 @@ const RegistroClinicoGenetico = ({
     gen,
     mut_prot,
     ref_seq,
+    progresividad,
   },
 }) => (
   <TableRow>
@@ -145,12 +142,13 @@ const RegistroClinicoGenetico = ({
         ? `${edad_dg_a}\u00A0años`
         : edad_dg_m
         ? `${edad_dg_m}\u00A0meses`
-        : "null"}
+        : ""}
     </TableCell>
     <TableCell align="center">{dg_audio_od}</TableCell>
     <TableCell align="center">{dg_audio_oi}</TableCell>
     <TableCell align="center">{perfil_od}</TableCell>
     <TableCell align="center">{perfil_oi}</TableCell>
+    <TableCell align="center">{progresividad}</TableCell>
     <TableCell align="center">{had_od}</TableCell>
     <TableCell align="center">{had_oi}</TableCell>
     <TableCell align="center">
@@ -158,7 +156,7 @@ const RegistroClinicoGenetico = ({
         ? `${edad_had_a}\u00A0años`
         : edad_had_m
         ? `${edad_had_m}\u00A0meses`
-        : "null"}
+        : ""}
     </TableCell>
     <TableCell align="center">{prog_adod}</TableCell>
     <TableCell align="center">{prog_adoi}</TableCell>
@@ -192,6 +190,7 @@ export function DataTableClinicaGenetica({ registros }) {
           <TableCell align="center">
             Diagnóstico audiológico oído&nbsp;izquierdo
           </TableCell>
+          <TableCell align="center">Progresividad</TableCell>
           <TableCell align="center">
             Perfil&nbsp;audiometrico oído&nbsp;derecho
           </TableCell>

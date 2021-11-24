@@ -46,6 +46,7 @@ const emptyState = {
   had_od: Selectors.had[0],
   had_oi: Selectors.had[0],
   edad_had_a: 0,
+  progresividad: Selectors.simple[0],
   edad_had_m: 0,
   prog_adod: Selectors.prog_ado[0],
   prog_adoi: Selectors.prog_ado[0],
@@ -305,6 +306,17 @@ export default function Formulary({ initialValue }) {
       </Box>
       <Box sx={{ gridColumn: "span 7", gridRow: "span 1" }}>
         <BasicSelect
+          name={"progresividad"}
+          displayName={"Progresividad"}
+          options={Selectors.simple}
+          callback={onChange("progresividad")}
+          value={state.progresividad}
+        />
+      </Box>
+      <Box sx={{ gridColumn: "span 7", gridRow: "span 1" }}></Box>
+
+      <Box sx={{ gridColumn: "span 7", gridRow: "span 1" }}>
+        <BasicSelect
           name={"had_od"}
           displayName={"HAD oído derecho"}
           options={Selectors.had}
@@ -321,7 +333,7 @@ export default function Formulary({ initialValue }) {
           value={state.had_oi}
         />
       </Box>
-      <Box sx={{ gridColumn: "span 4", gridRow: "span 1" }}>
+      <Box sx={{ gridColumn: "span 5", gridRow: "span 1" }}>
         <NumberInput
           name={"edad_had_a"}
           displayName={"Edad de inicio use de HAD (años)"}
@@ -329,7 +341,7 @@ export default function Formulary({ initialValue }) {
           value={state.edad_had_a}
         />
       </Box>
-      <Box sx={{ gridColumn: "span 4", gridRow: "span 1" }}>
+      <Box sx={{ gridColumn: "span 5", gridRow: "span 1" }}>
         <NumberInput
           name={"edad_had_m"}
           displayName={"Edad de inicio use de HAD (meses)"}
@@ -337,7 +349,6 @@ export default function Formulary({ initialValue }) {
           value={state.edad_had_m}
         />
       </Box>
-      <Box sx={{ gridColumn: "span 7", gridRow: "span 1" }}></Box>
       <Box sx={{ gridColumn: "span 7", gridRow: "span 1" }}>
         <BasicSelect
           name={"prog_adod"}
