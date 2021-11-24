@@ -236,7 +236,7 @@ export default function Formulary({ initialValue }) {
           value={state.prevision}
         />
       </Box>
-      <Box sx={{ gridColumn: "4/18", gridRow: "8" }}>
+      <Box sx={{ gridColumn: "3/18", gridRow: "8" }}>
         <Box
           sx={{
             borderBottom: 1,
