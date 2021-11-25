@@ -51,7 +51,11 @@ const RegistroSocioDemografico = ({
   <TableRow>
     <TableCell>{subject}</TableCell>
     <TableCell align="right">
-      {edad_a ? `${edad_a}\u00A0años` : edad_m ? `${edad_a}\u00A0meses` : ""}
+      {edad_a != 0
+        ? `${edad_a}\u00A0años`
+        : edad_m
+        ? `${edad_m}\u00A0meses`
+        : ""}
     </TableCell>
     <TableCell align="center">{e_gest}</TableCell>
     <TableCell align="center">{peso_nac}</TableCell>
