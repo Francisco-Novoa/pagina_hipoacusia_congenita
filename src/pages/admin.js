@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Input, Button } from "@mui/material";
 import axios from "axios";
 
-import Formulary from "../components/Formulary";
+import NestedList from "../components/AdminTabs";
 import { baseUrl } from "../static/constants/constants";
 
 const ariaLabel = { "aria-label": "description" };
@@ -58,7 +58,7 @@ export default function Deafness() {
     <Box>
       {state.login ? (
         <Box sx={styles.contentInner}>
-          <Formulary />
+          <NestedList />
         </Box>
       ) : (
         <Box sx={styles.login}>

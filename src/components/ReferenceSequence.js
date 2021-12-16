@@ -27,7 +27,7 @@ export default function ReferenceSequence({ array, onChange }) {
   };
 
   const removeSequence = () => {
-    if (array.length === 1) {
+    if (array?.length === 1) {
       onChange({
         target: {
           value: [

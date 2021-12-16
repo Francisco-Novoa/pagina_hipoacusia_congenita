@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Box, Typography, Button } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Box, Typography, Button, Modal } from "@mui/material";
 import axios from "axios";
 
 import BasicSelect from "../components/Dropdown";
@@ -19,6 +19,16 @@ const styles = {
     gridTemplateColumns: "repeat(20, 1fr)",
     gridAutoRows: "50px",
     gap: 2,
+  },
+  modal: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "#006994",
+    boxShadow: 24,
+    p: 1,
   },
 };
 
@@ -69,8 +79,11 @@ const emptyState = {
   ],
 };
 
-export default function Formulary({ initialValue }) {
-  const [state, setState] = useState(initialValue || emptyState);
+export default function Formulary({ initialValue, reload, setReload }) {
+  const [state, setState] = useState(emptyState);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const onChange = (name, number) => (event) => {
     setState((prevState) => ({
@@ -78,6 +91,12 @@ export default function Formulary({ initialValue }) {
       [name]: number ? parseInt(event.target.value, 0) : event.target.value,
     }));
   };
+
+  useEffect(() => {
+    if (initialValue) {
+      setState(initialValue);
+    }
+  }, [initialValue]);
 
   const onSubmit = async () => {
     try {
@@ -93,7 +112,33 @@ export default function Formulary({ initialValue }) {
           },
         }
       );
-      console.log(response);
+      if (reload !== undefined) {
+        setReload(!reload);
+      }
+      setState(emptyState);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onClean = () => {
+    setState(emptyState);
+  };
+
+  const onDelete = async () => {
+    try {
+      const token = sessionStorage.getItem("token");
+      const response = await axios.delete(
+        `${baseUrl}subject/${state.subject}`,
+        {
+          headers: {
+            authorization: `bearer ${token}`,
+          },
+        }
+      );
+      if (reload !== undefined) {
+        setReload(!reload);
+      }
       setState(emptyState);
     } catch (error) {
       console.error(error);
@@ -101,7 +146,7 @@ export default function Formulary({ initialValue }) {
   };
 
   return (
-    <Box sx={styles.mainStyle}>
+    <Box sx={{ ...styles.mainStyle }}>
       <Box
         sx={{
           gridColumn: "3/21",
@@ -115,8 +160,8 @@ export default function Formulary({ initialValue }) {
         <br />
         <Typography variant="h5">VARIABLES SOCIODEMOGRÁFICAS</Typography>
       </Box>
-      <Box sx={{ gridColumn: "1/3", gridRow: "1/30" }}></Box>
-      <Box sx={{ gridColumn: "18/21", gridRow: "3/30" }}></Box>
+      <Box sx={{ gridColumn: "1/3", gridRow: "1/35" }}></Box>
+      <Box sx={{ gridColumn: "18/21", gridRow: "3/35" }}></Box>
       <Box sx={{ gridColumn: "span 3", gridRow: "span 1" }}>
         <NumberInput
           name={"subject"}
@@ -476,12 +521,64 @@ export default function Formulary({ initialValue }) {
           gridColumn: "span 7",
           gridRow: "span 2",
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "space-between",
           alignContent: "center",
+          paddingTop: "16px",
+          paddingBottom: "16px",
         }}
       >
-        <Button onClick={onSubmit}>Guardar</Button>
+        <Button variant="outlined" onClick={onSubmit}>
+          Guardar
+        </Button>
+        <Button variant="outlined" onClick={onClean}>
+          Limpiar Formulario
+        </Button>
+        <Button variant="outlined" color="error" onClick={handleOpen}>
+          Eliminar
+        </Button>
       </Box>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={styles.modal}>
+          <Box
+            sx={{
+              width: "100%",
+              bgcolor: "#fafafa",
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "150px",
+              justifyContent: "space-evenly",
+            }}
+          >
+            <Typography
+              sx={{ textAlign: "center" }}
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+            >
+              Vas a borrar un registro. Esta accion es irreversible.
+            </Typography>
+            <Typography sx={{ textAlign: "center" }}>¿Estas Seguro?</Typography>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Button
+                variant="outlined"
+                sx={{ mx: 4 }}
+                color="error"
+                onClick={onDelete}
+              >
+                Si
+              </Button>
+              <Button variant="outlined" sx={{ mx: 4 }} onClick={handleClose}>
+                No
+              </Button>
+            </Box>
+          </Box>
+        </Box>
+      </Modal>
     </Box>
   );
 }
