@@ -106,6 +106,7 @@ module.exports = {
     "No responde",
   ],
   dg_audio: [
+    "Sin registro",
     "Normoacusia",
     "Hipoacusia sensorioneural leve",
     "Hipoacusia sensorioneural moderada",
